@@ -49,7 +49,7 @@ class BookDetailView(generic.DetailView):
 class AuthorListView(generic.ListView):
     """View class for web page of all the books."""
     model = Author
-    paginate_by = 2  
+    paginate_by = 10  
 
 class AuthorDetailView(generic.DetailView):
     model =Author
