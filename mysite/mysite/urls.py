@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
     path('users/', include('users.urls')),
-    path('', include('hello.urls')),                                                                                           
+    path('hello', include('hello.urls')), 
+    path('', include('home.urls')),                                                                                          
     re_path(r'^site/(?P<path>.*)$', serve,
         {'document_root': SITE_ROOT, 'show_indexes': True},
         name='site_path'
