@@ -87,11 +87,11 @@ def renew_book_librarian(request, pk):
         # Check if the form is valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
-            book_instance.due_back = form.cleaned_data['due_date']
+            book_instance.due_back = form.cleaned_data['due_back']
             book_instance.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('books-borrowed'))
+            return HttpResponseRedirect(reverse('catalog:books-borrowed'))
     # If this is a GET (or any other method) create the default form.
     else:
         proposed_renewal_date = datetime.date.today() + datetime.timedelta(weeks=3)
@@ -104,28 +104,28 @@ def renew_book_librarian(request, pk):
   
     return render(request, 'catalog/book_renew_librarian.html', context)
 
-class AuthorCreate(CreateView):
+class AuthorCreate(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     model = Author
     fields = ['first_name', 'last_name', 'date_of_birth', 'date_of_death']
     #initial = {'date_of_death': '11/06/2020'}
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model = Author
     fields = '__all__' # Not recommended (potential security issue if more fields added)
 
-class AuthorDelete(DeleteView):
+class AuthorDelete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     model = Author
     success_url = reverse_lazy('authors')
 
-class BookCreate(CreateView):
+class BookCreate(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     model = Book
     fields = '__all__'
 
-class BookUpdate(UpdateView):
+class BookUpdate(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model = Book
     fields = '__all__' # Not recommended (potential security issue if more fields added)
 
-class BookDelete(DeleteView):
+class BookDelete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     model = Book
     success_url = reverse_lazy('books')
 
