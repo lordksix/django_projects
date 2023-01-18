@@ -48,6 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hello.apps.HelloConfig',
+
+    'django_extensions', 
+    'crispy_forms',
+    'rest_framework', 
+    'social_django',  
+    'taggit', 
+
     'autos.apps.AutosConfig',
     'cats.apps.CatsConfig',
     'users',
@@ -132,6 +139,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
