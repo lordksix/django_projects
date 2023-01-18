@@ -1,0 +1,73 @@
+
+.message {
+    font-weight: 600;
+    color: blue;
+}
+.headimg {
+    width: 2em;
+    height: auto;
+    padding-left: 2%;
+}
+
+.header-a {
+    background-color: red;
+    align-items: center;
+    padding: 8px 5px 8px 5px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    
+}
+.header-h{
+    font-size: 3.5em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    text-align: center;
+    font-weight: 800;
+}
+.header-d__sub{
+    text-align: right;
+    font-size: 1.5em;
+    background-color: yellow;
+    border-radius: 5%;
+    text-decoration: none;
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    background-color: black;
+    margin-top:0.1em;
+    border-color: white;
+    font-size: 1.2em;
+    font-family: 'Trebuchetc:\Users\Wladimir\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-sandbox\workbench\workbench.html MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    padding: 8px 5px 8px 5px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-brand {
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.navbar-item {
+    font-variant: small-caps;
+    margin-left: 30px;
+}
+
+.body-content {
+    padding: 5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+footer{
+    height: 2em;
+    background-color: gainsboro;
+    color: goldenrod;
+    font-weight: 600;
+}

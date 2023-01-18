@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hello.apps.HelloConfig',
+    'autos.apps.AutosConfig',
+    'cats.apps.CatsConfig',
     'users',
     'home.apps.HomeConfig',
     'polls.apps.PollsConfig',
