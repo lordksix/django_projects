@@ -3,7 +3,8 @@
 
 {% block content %}
   <form action="" method="post">
-    {% form | crispy %}
+    {% csrf_token %}
+    {{ form|crispy }}
     <input type="submit" value="Submit">
     <input type="submit" onclick="window.location='{% url 'autos:all' %}' ; return false;" value="Cancel">
   </form>

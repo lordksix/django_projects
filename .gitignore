@@ -1,5 +1,6 @@
 # Text backup files
 *.bak
-
+github_setting.py
 # Database
 *.sqlite3
+.env
