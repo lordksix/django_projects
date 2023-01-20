@@ -1,0 +1,52 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block content %}
+
+<main class=" main1 form-signin w-100 m-auto px-4 text-center rounded">
+  <form method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {% load static%}
+    <img class="mb-4" src="{% static 'image/Orange_sport_car.svg' %}" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">{% trans "Please sign in" %}</h1>
+
+    <div class="form-floating">
+      {{ form.login }}
+      {{ form.login.label_tag }}
+    </div>
+    <div class="form-floating">
+      {{ form.password}}
+      {{ form.password.label_tag }}
+    </div>
+
+    <div class="checkbox mb-3">
+      {{ form.remember }}
+      {{ form.remember.label_tag }}
+    </div>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="w-100 btn btn-lg btn-primary" type="submit">{% trans "Login" %}</button>
+  </form>
+  <br>
+  <div>
+    <a href="{% provider_login_url "facebook" method="js_sdk" %}" class="btn btn-block btn-social btn-sm btn-facebook">
+      <span class="fa fa-facebook"></span>
+                  {% trans " Sign In" %}
+    </a>
+    <a href="{% provider_login_url "twitter_oauth2" %}" class="btn btn-block btn-social btn-sm btn-twitter">
+      <span class="fa fa-twitter"></span>
+                  {% trans " Sign In" %}
+    </a>
+    <a href="{% provider_login_url "github"%}" class="btn btn-block btn-social btn-sm btn-github">
+      <span class="fa fa-github"></span>
+                  {% trans " Sign In" %}
+    </a></div>
+    <br>
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+</main>
+
+
+{% endblock %}
