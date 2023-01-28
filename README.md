@@ -1,2 +1,3 @@
 # django_projects
- new app
+
+An unfinished Django App
