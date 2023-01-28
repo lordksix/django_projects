@@ -27,14 +27,14 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SITE_ROOT = os.path.join(BASE_DIR, 'site')
 
 urlpatterns = [
-    
+    path('', include('solo.urls')),
     path('polls/', include('polls.urls')),
     path('autos/', include('autos.urls')),
     path('cats/', include('cats.urls')),
     path('ads/', include('ads.urls')),
     path('users/', include('users.urls')),
     path('hello', include('hello.urls')),
-    path('', include('home.urls')),                                                                                          
+    path('home', include('home.urls')),                                                                                          
     re_path(r'^site/(?P<path>.*)$', serve,
         {'document_root': SITE_ROOT, 'show_indexes': True},
         name='site_path'
