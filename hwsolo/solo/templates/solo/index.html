@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to Homework TimeCode_2276</h1>
+    <p>{% if result %}
+    Your result is {{result}}
+    {% endif %}</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="m-auto">
+          <div class="form-floating">
+            <input type="text" placeholder="Field1:" class="form-control" id="floatingInput" name="search1"
+            value="" >
+            <label for="floatingInput">Field1:</label>
+          </div>
+          <div class="m-auto row ali">
+            <div class="form-floating">
+              <input type="text" placeholder="Field2:" class="form-control" id="floatingInput" name="search2"
+              value="">
+              <label for="floatingInput">Field2:</label>
+            </div>
+          <div>
+            <button type="submit"><i class="fa fa-search"></i></button>
+            <a href="{% url 'solo:index' %}"><i class="fa fa-undo"></i></a>
+          </div>
+        </div>
+      </form>
+    
+</body>
+</html>

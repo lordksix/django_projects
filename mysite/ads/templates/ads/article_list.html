@@ -1,45 +1,69 @@
 {% extends "home/layout.html" %}
+{% load i18n %}
 {% block content %}
 <h1>Articles</h1>
+
+<form >
+  <div class="m-auto row ali">
+    <div class="form-floating col-7">
+      <input type="text" placeholder= {% trans "Search" %} class="form-control-sm" id="floatingInput" name="search"
+      {% if search %} value="{{ search }}" {% endif %}>
+      <!-- <label for="floatingInput">{% trans "Search" %}</label> -->
+    </div>
+    <div class="col">
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <a href="{% url 'ads:all' %}"><i class="fa fa-undo"></i></a>
+    </div>
+  </div>
+</form>
+
 <p>
 {% if article_list %}
 <ul>
   {% for article in article_list %}
-    <li>
+    <li><div>
         <a href="{% url 'ads:article_detail'  article.id %}">{{ article.title }}</a>
         {% if article.owner == user %}
-        (<a href="{% url 'ads:article_update' article.id %}">Edit</a> |
-        <a href="{% url 'ads:article_delete' article.id %}">Delete</a>)
+          (<a href="{% url 'ads:article_update' article.id %}">{% trans "Edit" %}</a> |
+          <a href="{% url 'ads:article_delete' article.id %}">{% trans "Delete:" %}</a>)
         {% endif %}
         {% if user.is_authenticated %}
-        <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
-        <a href="#" onclick=
-            "favPost('{% url 'ads:article_unfavorite' article.id %}', {{ article.id }} );return false;"
-            {% if article.id not in favorites %} style="display: none;" {% endif %}
-            id="favorite_star_{{article.id}}">
-        <span class="fa-stack" style="vertical-align: middle;">
-        <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
-        <i class="fa fa-star-o fa-stack-1x"></i>
-        </span>
-        </a>
-        
-        <!-- the second href -->
-        <a href="#" onclick=
-             "favPost('{% url 'ads:article_favorite' article.id %}', {{ article.id }} );return false;"
-            {% if article.id in favorites %} style="display: none;" {% endif %}
-            id="unfavorite_star_{{article.id}}">
-        <span class="fa-stack" style="vertical-align: middle;">
-        <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
-        <i class="fa fa-star-o fa-stack-1x"></i>
-        </span>
-        </a>
+          <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
+          <a href="#" onclick=
+              "favPost('{% url 'ads:article_unfavorite' article.id %}', {{ article.id }} );return false;"
+              {% if article.id not in favorites %} style="display: none;" {% endif %}
+              id="favorite_star_{{article.id}}">
+            <span class="fa-stack" style="vertical-align: middle;">
+            <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
+            <i class="fa fa-star-o fa-stack-1x"></i></span>
+          </a>
+          <!-- the second href -->
+          <a href="#" onclick=
+              "favPost('{% url 'ads:article_favorite' article.id %}', {{ article.id }} );return false;"
+              {% if article.id in favorites %} style="display: none;" {% endif %}
+              id="unfavorite_star_{{article.id}}">
+          <span class="fa-stack" style="vertical-align: middle;">
+          <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
+          <i class="fa fa-star-o fa-stack-1x"></i>
+          </span>
+          </a>
         {% endif %}
-
+        </div>       
+        <div>
+          <small>{% trans "Tags:" %}
+          {% if article.tags.all %}
+            {% for tag in article.tags.all %}
+              {{tag}}
+            {% endfor %}
+          {% else %}
+            {% trans "None" %}
+          {% endif %}</small>
+        </div>
     </li>
   {% endfor %}
 </ul>
 {% else %}
-  <p>There are no articles in the database.</p>
+  <p>{% trans "There are no articles in the database." %}</p>
 {% endif %}
 </p>
 <p>

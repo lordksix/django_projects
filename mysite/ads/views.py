@@ -9,14 +9,28 @@ from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.db.utils import IntegrityError
+from django.db.models import Q
 
 
 class ArticleListView(OwnerListView):
     model = Article
     # By convention:
     template_name = "ads/article_list.html"
+    
     def get(self, request) :
-        thing_list = Article.objects.all()
+        strval =  request.GET.get("search", False)
+        
+        if strval :
+            # Simple title-only search
+            # __icontains for case-insensitive search
+            strval=strval.strip()
+            query = Q(title__icontains=strval)
+            query.add(Q(text__icontains=strval), Q.OR)
+            query.add(Q(tags__name__in=[strval]), Q.OR)
+            thing_list = Article.objects.filter(query).select_related().distinct().order_by('-updated_at')[:10]
+        else :
+            thing_list = Article.objects.all().order_by('-updated_at')[:10]        
+        #thing_list = Article.objects.all() if there is no search
         favorites = list()
         if request.user.is_authenticated:
             # rows = [{'id': 2}, {'id': 4} ... ]  (A list of rows)
@@ -25,7 +39,6 @@ class ArticleListView(OwnerListView):
             favorites = [ row['id'] for row in rows ]
         ctx = {'article_list' : thing_list, 'favorites': favorites}
         return render(request, self.template_name, ctx)
-
 
 class ArticleDetailView(OwnerDetailView):
     model = Article
@@ -49,9 +62,10 @@ class ArticleCreateView(LoginRequiredMixin, View):
             return render(request, self.template_name, ctx)
 
         # Add owner to the model before saving
-        pic = form.save(commit=False)
-        pic.owner = self.request.user
-        pic.save()
+        article = form.save(commit=False)
+        article.owner = self.request.user
+        article.save()
+        form.save_m2m()
         return redirect(self.success_url)
 
 class ArticleUpdateView(LoginRequiredMixin, View):

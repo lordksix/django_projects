@@ -26,6 +26,7 @@ DATABASES = {
 
 
 SITE_ID = 1
+TAGGIT_CASE_INSENSITIVE = True
 #ACCOUNT_AUTHENTICATION_METHOD='email'
 ACCOUNT_EMAIL_REQUIRED=True
 # Provider specific settings
@@ -127,6 +128,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'hello.apps.HelloConfig',
     'ads.apps.AdsConfig',
+    'solo.apps.SoloConfig',
 ]
 
 ACCOUNT_FORMS = {'login': 'mysite.forms.MyCustomLoginForm'}
