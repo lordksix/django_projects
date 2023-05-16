@@ -1,7 +1,7 @@
+from datetime import date
+import uuid
 from django.db import models
 from django.urls import reverse
-import uuid
-from datetime import date
 from django.contrib.auth.models import User
 
 class Genre(models.Model):

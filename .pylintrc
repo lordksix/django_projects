@@ -1,0 +1,10 @@
+{
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--load-plugins pylint_django",
+    "--disable=C0111",
+    "--django-settings-module=producerApp.settings"
+  ]
+}
